@@ -1,10 +1,13 @@
 import React from 'react';
+import { create, all } from 'mathjs';
+
+const math = create(all, {});
 
 const calculator = () => {
-  var result = "";
+  let result = "";
   const clickbutton = (event) => {
     let text = event.target.textContent;
-    // console.log(text, "text-----one")
+
     if (result.length >= 16) {
       result = "";
       document.getElementById("result").innerHTML = "Out of range";
@@ -25,20 +28,16 @@ const calculator = () => {
           break;
         case "=":
           if (result === "") {
-            result = "";
             document.getElementById("result").innerHTML = 0;
           } else {
             try {
-              //   console.log(result.replaceAll("x", "*").replaceAll("÷", "/"),"srk");
-              // result = String(eval(result.replaceAll("x","*").replaceAll("÷","/")));
-              // Safely evaluate the expression without using eval
-              const safeEval = (expression) => {
-                const sanitizedExpression = expression.replaceAll("x", "*").replaceAll("÷", "/");
-                return Function(`return ${sanitizedExpression}`)();
-              };
-
-              // Usage:
-              result = String(safeEval(result));
+              // Replace custom operators with standard ones
+              const sanitizedExpression = result
+                .replaceAll("x", "*")
+                .replaceAll("÷", "/");
+              
+              // Safely evaluate the expression using mathjs
+              result = String(math.evaluate(sanitizedExpression));
               document.getElementById("result").innerHTML = result;
             } catch (error) {
               document.getElementById("result").innerHTML = "Invalid";
@@ -102,7 +101,6 @@ const calculator = () => {
         </div>
       </div>
     </div>
-
   );
 };
 
