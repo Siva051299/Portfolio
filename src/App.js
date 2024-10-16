@@ -8,7 +8,6 @@ import About from './About';
 import Content from './Content';
 import Contact from './Contact';
 import HeaderComp from './Header';
-import Calculator from './Calculator';
 import Sidenav from './Sidenav';
 import Portfolio from './side/Portfolio';
 
@@ -31,7 +30,6 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
               <Route path="/content" element={<Content />} />
-              <Route path="/calculator" element={<Calculator />} />
               <Route path="/Portfolio" element={<Portfolio />} />
             </Routes>
           </div>
